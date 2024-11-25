@@ -1,7 +1,15 @@
-![mod](https://github.com/NemoNotFound/NemoNotFound/blob/master/resources/png/mod-title.png?raw=true)
+![Nemo's Inventory Sorter](https://github.com/NemoNotFound/NemoNotFound/blob/master/resources/png/nemos-inventory-sorter.png?raw=true)
 <br><br>
 
 # Description
+Nemo's Inventory Sorter adds buttons to inventories to sort the items.
+<br>
+
+### DISCLAIMER <br>
+This mod works on the client side only, which gives you an advantage over other players. <br>
+I can't guarantee that you won't get banned from public servers when using this mod on them. <br>
+Use on public servers at your own risk or ask a server admin.
+<br>
 <br>
 
 [![Join my Discord](https://github.com/NemoNotFound/NemoNotFound/blob/master/resources/svg/join_discord_button.svg?raw=true)](https://discord.com/invite/yxs9dga)
@@ -9,17 +17,17 @@
 <br>
 
 I love to create mods for Minecraft and wish to live off it one day, so I hope you like what I do. <br>
-Either way feel free to give me your feedback and suggestions, either on my Discord or the [discussions](https://github.com/NemoNotFound/mod/discussions/) :)
+Either way feel free to give me your feedback and suggestions, either on my Discord or the [discussions](https://github.com/NemoNotFound/NemosInventorySorter/discussions/) :)
 <br><br>
-For more information check the [wiki](https://www.nemonotfound.com/minecraft-mods/mod/wiki).
+For more information check the [wiki](https://www.nemonotfound.com/minecraft-mods/nemos-inventory-sorter/wiki).
 
 [![ko-fi donation](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/nemonotfound)
 <br>
 <br>
 
 # Downloads
-- [CurseForge](https://curseforge.com/minecraft/mc-mods/mod)
-- [Modrinth](https://modrinth.com/mod/mod)
+- [CurseForge](https://curseforge.com/minecraft/mc-mods/nemos-inventory-sorter)
+- [Modrinth](https://modrinth.com/mod/nemos-inventory-sorter)
 <br>
 <br>
 

@@ -16,17 +16,19 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-            "com.example.examplemod.ExampleMod"
+            "com.nemonotfound.nemos.inventory.sorter.NemosInventorySorterFabric"
         ]
     },
     "mixins": [
-        "${mod_id}.mixins.json",
-        "${mod_id}.fabric.mixins.json"
+        "${mod_id}.mixins.json"
     ],
     "depends": {
         "fabricloader": ">=${fabric_loader_version}",
         "fabric-api": "*",
-        "minecraft": "${minecraft_version}",
+        "minecraft": [
+            "1.21.2",
+            "1.21.3"
+        ],
         "java": ">=${java_version}"
     },
     "suggests": {
