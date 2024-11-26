@@ -8,8 +8,8 @@
         "${mod_author}"
     ],
     "contact": {
-        "homepage": "https://fabricmc.net/",
-        "sources": "https://github.com/FabricMC/fabric-example-mod"
+        "homepage": "https://nemonotfound.com",
+        "sources": "https://github.com/NemoNotFound/NemosInventorySorter"
     },
     "license": "${license}",
     "icon": "${mod_id}.png",
