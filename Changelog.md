@@ -1,6 +1,4 @@
-# Changelog v1.0
+# Changelog v1.0-1
 
-## Additions
-- Added Sort buttons to inventories
-  - Sort alphabetically
-  - Sort alphabetically reversed
+## Fixes
+- Filled map can cause endless loop when trying to merge maps which can't be merged

@@ -152,8 +152,9 @@ public abstract class AbstractSortAlphabeticallyButton extends AbstractWidget {
             Slot leftSlot = menu.slots.get(leftSlotEntry.getKey());
             Slot rightSlot = menu.slots.get(rightSlotEntry.getKey());
             ItemStack leftItem = leftSlot.getItem();
+            ItemStack rightItem = rightSlot.getItem();
 
-            if (leftItem.getCount() < leftItem.getMaxStackSize()) {
+            if (leftItem.getCount() < leftItem.getMaxStackSize() && leftItem.getComponents() == rightItem.getComponents()) {
                 swapItems(minecraft.gameMode, containerId, rightSlotEntry.getKey(), leftSlotEntry.getKey(), minecraft.player);
             } else {
                 leftSlotIndex++;
