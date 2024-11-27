@@ -2,7 +2,7 @@
 <br><br>
 
 # Description
-Nemo's Inventory Sorter adds buttons to inventories to sort the items.
+Nemo's Inventory Sorter is a client-only mod that adds buttons to inventories to sort items.
 <br>
 
 ### DISCLAIMER <br>
