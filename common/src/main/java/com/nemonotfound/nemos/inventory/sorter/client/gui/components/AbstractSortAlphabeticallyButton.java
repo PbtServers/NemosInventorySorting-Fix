@@ -9,6 +9,8 @@ import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.*;
@@ -62,6 +64,8 @@ public abstract class AbstractSortAlphabeticallyButton extends AbstractWidget {
         Map<Integer, Integer> sortedItemMap = createSortedItemMap(menu);
 
         swapItemsUntilSorted(sortedItemMap, minecraft, containerId);
+        //TODO: Temporary fix, should be improved
+        mergeAllItems(menu, containerId, minecraft);
     }
 
     private void mergeAllItems(AbstractContainerMenu menu, int containerId, Minecraft minecraft) {
@@ -154,7 +158,7 @@ public abstract class AbstractSortAlphabeticallyButton extends AbstractWidget {
             ItemStack leftItem = leftSlot.getItem();
             ItemStack rightItem = rightSlot.getItem();
 
-            if (leftItem.getCount() < leftItem.getMaxStackSize() && leftItem.getComponents() == rightItem.getComponents()) {
+            if (isFullStack(leftItem) && doDataComponentsMatch(leftItem.getComponents(), rightItem.getComponents())) {
                 swapItems(minecraft.gameMode, containerId, rightSlotEntry.getKey(), leftSlotEntry.getKey(), minecraft.player);
             } else {
                 leftSlotIndex++;
@@ -164,6 +168,26 @@ public abstract class AbstractSortAlphabeticallyButton extends AbstractWidget {
                 rightSlotIndex--;
             }
         }
+    }
+
+    private boolean isFullStack(ItemStack itemStack) {
+        return itemStack.getCount() < itemStack.getMaxStackSize();
+    }
+
+    private boolean doDataComponentsMatch(DataComponentMap firstItemComponents, DataComponentMap secondItemComponents) {
+        if (hasCustomName(firstItemComponents)) {
+            return hasCustomName(secondItemComponents) && matchesCustomName(firstItemComponents, secondItemComponents);
+        }
+
+        return true;
+    }
+
+    private boolean hasCustomName(DataComponentMap components) {
+        return components.has(DataComponents.CUSTOM_NAME);
+    }
+
+    private boolean matchesCustomName(DataComponentMap firstItemComponents, DataComponentMap secondItemComponents) {
+        return firstItemComponents.get(DataComponents.CUSTOM_NAME) == secondItemComponents.get(DataComponents.CUSTOM_NAME);
     }
 
     private void swapItems(MultiPlayerGameMode gameMode, int containerId, int slot, int targetSlot, LocalPlayer player) {

@@ -1,4 +1,5 @@
-# Changelog v1.0.1
+# Changelog v1.0.2
 
 ## Fixes
-- Filled map can cause endless loop when trying to merge maps which can't be merged
+- Merging of items broke with version 1.0.1
+- Sorting normally and then reversed can cause wrong order of items by item count
