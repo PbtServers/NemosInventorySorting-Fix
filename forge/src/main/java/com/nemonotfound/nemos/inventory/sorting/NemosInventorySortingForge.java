@@ -31,6 +31,7 @@ public class NemosInventorySortingForge {
                 int imageWidth = abstractContainerScreen.getXSize();
 
                 //TODO: Change Component
+                //TODO: menu as argument instead of abstractContainerScreen
                 SortAlphabeticallyButton sortAlphabeticallyButton = new SortAlphabeticallyButton(getLeftPosWithOffset(leftPos, imageWidth, 40), y, size, size, Component.literal("S"), abstractContainerScreen);
                 SortAlphabeticallyReversedButton sortAlphabeticallyReversedButton = new SortAlphabeticallyReversedButton(getLeftPosWithOffset(leftPos, imageWidth, 22), y, size, size, Component.literal("S"), abstractContainerScreen);
 
