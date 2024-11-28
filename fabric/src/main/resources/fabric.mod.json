@@ -9,14 +9,14 @@
     ],
     "contact": {
         "homepage": "https://nemonotfound.com",
-        "sources": "https://github.com/NemoNotFound/NemosInventorySorter"
+        "sources": "https://github.com/NemoNotFound/NemosInventorySorting"
     },
     "license": "${license}",
     "icon": "${mod_id}.png",
     "environment": "*",
     "entrypoints": {
         "main": [
-            "com.nemonotfound.nemos.inventory.sorter.NemosInventorySorterFabric"
+            "com.nemonotfound.nemos.inventory.sorting.NemosInventorySortingFabric"
         ]
     },
     "mixins": [

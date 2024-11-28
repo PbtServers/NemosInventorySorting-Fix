@@ -1,4 +1,4 @@
-package com.nemonotfound.nemos.inventory.sorter.client.gui.components;
+package com.nemonotfound.nemos.inventory.sorting.client.gui.components;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;

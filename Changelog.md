@@ -1,5 +1,7 @@
-# Changelog v1.0.2
+# Changelog v1.0.3
+
+## Changes
+- renamed mod to Nemo's Inventory Sorting
 
 ## Fixes
-- Merging of items broke with version 1.0.1
-- Sorting normally and then reversed can cause wrong order of items by item count
+- Inventory sorting doesn't work for Forge

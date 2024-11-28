@@ -1,10 +1,10 @@
-package com.nemonotfound.nemos.inventory.sorter.client.gui.components;
+package com.nemonotfound.nemos.inventory.sorting.client.gui.components;
 
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
-import static com.nemonotfound.nemos.inventory.sorter.Constants.MOD_ID;
+import static com.nemonotfound.nemos.inventory.sorting.Constants.MOD_ID;
 
 public class SortAlphabeticallyButton extends AbstractSortAlphabeticallyButton {
 

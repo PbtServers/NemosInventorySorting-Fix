@@ -7,9 +7,6 @@ plugins {
 base {
     archivesName = "${mod_id_jar}-Forge"
 }
-mixin {
-    config("${mod_id}.mixins.json")
-}
 
 minecraft {
     mappings channel: 'official', version: minecraft_version

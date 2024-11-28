@@ -1,8 +1,8 @@
-package com.nemonotfound.nemos.inventory.sorter;
+package com.nemonotfound.nemos.inventory.sorting;
 
 import net.fabricmc.api.ModInitializer;
 
-public class NemosInventorySorterFabric implements ModInitializer {
+public class NemosInventorySortingFabric implements ModInitializer {
     
     @Override
     public void onInitialize() {
