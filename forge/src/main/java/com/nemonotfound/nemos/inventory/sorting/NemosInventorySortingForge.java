@@ -4,6 +4,8 @@ import com.nemonotfound.nemos.inventory.sorting.client.gui.components.SortAlphab
 import com.nemonotfound.nemos.inventory.sorting.client.gui.components.SortAlphabeticallyReversedButton;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.inventory.ContainerScreen;
+import net.minecraft.client.gui.screens.inventory.ShulkerBoxScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ScreenEvent;
@@ -24,7 +26,8 @@ public class NemosInventorySortingForge {
         public static void onScreenEvent(ScreenEvent.Init.Post event) {
             Screen screen = event.getScreen();
 
-            if (screen instanceof AbstractContainerScreen<?> abstractContainerScreen) {
+            if (screen instanceof ContainerScreen || screen instanceof ShulkerBoxScreen) {
+                AbstractContainerScreen<?> abstractContainerScreen = (AbstractContainerScreen<?>) screen;
                 int y = abstractContainerScreen.getGuiTop() + 4;
                 int size = 12;
                 int leftPos = abstractContainerScreen.getGuiLeft();

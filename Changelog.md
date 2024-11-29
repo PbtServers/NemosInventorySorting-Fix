@@ -1,7 +1,4 @@
-# Changelog v1.0.3
-
-## Changes
-- renamed mod to Nemo's Inventory Sorting
+# Changelog v1.0.3.1
 
 ## Fixes
-- Inventory sorting doesn't work for Forge
+- Buttons are added outside of chest/shulker screen
