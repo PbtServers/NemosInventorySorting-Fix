@@ -1,11 +1,13 @@
 package com.nemonotfound.nemos.inventory.sorting.client.gui.components;
 
+import com.nemonotfound.nemos.inventory.sorting.interfaces.GuiPosition;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
+import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.RenderType;
@@ -28,17 +30,26 @@ public abstract class AbstractSortAlphabeticallyButton extends AbstractWidget {
 
 
     private final AbstractContainerScreen<?> containerScreen;
+    private final int xOffset;
 
-    public AbstractSortAlphabeticallyButton(int x, int y, int width, int height, Component message, AbstractContainerScreen<?> containerScreen) {
+    public AbstractSortAlphabeticallyButton(int x, int y, int xOffset, int width, int height, Component message, AbstractContainerScreen<?> containerScreen) {
         super(x, y, width, height, message);
         this.containerScreen = containerScreen;
+        this.xOffset = xOffset;
     }
 
     @Override
     protected void renderWidget(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         if (containerScreen instanceof CreativeModeInventoryScreen creativeModeInventoryScreen && !creativeModeInventoryScreen.isInventoryOpen()) {
             return;
-        }//TODO: Update pos for player inventory
+        }
+
+        if (containerScreen instanceof InventoryScreen) {
+            int leftPos = ((GuiPosition) containerScreen).nemosInventorySorting$getLeftPos();
+            int imageWidth = ((GuiPosition) containerScreen).nemosInventorySorting$getImageWidth();
+
+            this.setX(leftPos + imageWidth - this.xOffset);
+        }
 
         if (this.isHovered()) {
             guiGraphics.blitSprite(RenderType::guiTextured, getButtonHoverTexture(), this.getX(), this.getY(), this.getWidth(), this.getHeight());

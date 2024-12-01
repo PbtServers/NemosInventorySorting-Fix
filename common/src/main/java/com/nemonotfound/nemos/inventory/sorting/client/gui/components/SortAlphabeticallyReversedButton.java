@@ -15,8 +15,8 @@ public class SortAlphabeticallyReversedButton extends AbstractSortAlphabetically
     private final ResourceLocation buttonTexture = ResourceLocation.fromNamespaceAndPath(MOD_ID, "sort_button_alphabetically_dec");
     private final ResourceLocation buttonHoverTexture = ResourceLocation.fromNamespaceAndPath(MOD_ID, "sort_button_alphabetically_dec_highlighted");
 
-    public SortAlphabeticallyReversedButton(int x, int y, int width, int height, Component message, AbstractContainerScreen<?> containerScreen) {
-        super(x, y, width, height, message, containerScreen);
+    public SortAlphabeticallyReversedButton(int x, int y, int xOffset, int width, int height, Component message, AbstractContainerScreen<?> containerScreen) {
+        super(x, y, xOffset, width, height, message, containerScreen);
     }
 
     @Override
