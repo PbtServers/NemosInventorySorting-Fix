@@ -5,6 +5,7 @@ import com.nemonotfound.nemos.inventory.sorting.client.gui.components.SortAlphab
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.ContainerScreen;
+import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.gui.screens.inventory.ShulkerBoxScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
@@ -25,8 +26,8 @@ public class NemosInventorySortingForge {
         @SubscribeEvent
         public static void onScreenEvent(ScreenEvent.Init.Post event) {
             Screen screen = event.getScreen();
-
-            if (screen instanceof ContainerScreen || screen instanceof ShulkerBoxScreen) {
+            //TODO: Add button for creative mode
+            if (screen instanceof ContainerScreen || screen instanceof ShulkerBoxScreen || screen instanceof InventoryScreen) {
                 AbstractContainerScreen<?> abstractContainerScreen = (AbstractContainerScreen<?>) screen;
                 int y = abstractContainerScreen.getGuiTop() + 4;
                 int size = 12;

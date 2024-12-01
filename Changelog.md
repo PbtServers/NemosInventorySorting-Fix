@@ -1,4 +1,7 @@
-# Changelog v1.0.3.1
+# Changelog v1.1
+
+## Additions
+- Added sort buttons to player inventory
 
 ## Fixes
-- Buttons are added outside of chest/shulker screen
+- Sorting doesn't work properly with bundles

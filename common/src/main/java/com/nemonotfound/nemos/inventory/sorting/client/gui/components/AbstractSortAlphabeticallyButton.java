@@ -5,6 +5,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.RenderType;
@@ -13,6 +14,7 @@ import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -34,6 +36,10 @@ public abstract class AbstractSortAlphabeticallyButton extends AbstractWidget {
 
     @Override
     protected void renderWidget(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        if (containerScreen instanceof CreativeModeInventoryScreen creativeModeInventoryScreen && !creativeModeInventoryScreen.isInventoryOpen()) {
+            return;
+        }//TODO: Update pos for player inventory
+
         if (this.isHovered()) {
             guiGraphics.blitSprite(RenderType::guiTextured, getButtonHoverTexture(), this.getX(), this.getY(), this.getWidth(), this.getHeight());
         } else {
@@ -64,7 +70,6 @@ public abstract class AbstractSortAlphabeticallyButton extends AbstractWidget {
         Map<Integer, Integer> sortedItemMap = createSortedItemMap(menu);
 
         swapItemsUntilSorted(sortedItemMap, minecraft, containerId);
-        //TODO: Temporary fix, should be improved
         mergeAllItems(menu, containerId, minecraft);
     }
 
@@ -78,9 +83,11 @@ public abstract class AbstractSortAlphabeticallyButton extends AbstractWidget {
     private Map<Integer, Integer> createSortedItemMap(AbstractContainerMenu menu) {
         List<Map.Entry<Integer, ItemStack>> itemMapEntries = getSortedSlotItems(menu);
         Map<Integer, Integer> sortedItemMap = new LinkedHashMap<>();
+        int containerStartIndex = getContainerStartIndex(menu);
 
-        for (int newSlot = 0; newSlot < itemMapEntries.size(); newSlot++) {
-            int currentSlot = itemMapEntries.get(newSlot).getKey();
+        for (int i = 0; i < itemMapEntries.size(); i++) {
+            int newSlot = i + containerStartIndex;
+            int currentSlot = itemMapEntries.get(i).getKey();
             if (currentSlot != newSlot) {
                 sortedItemMap.put(currentSlot, newSlot);
             }
@@ -120,7 +127,7 @@ public abstract class AbstractSortAlphabeticallyButton extends AbstractWidget {
     private @NotNull List<Map.Entry<Integer, ItemStack>> getSortedSlotItems(AbstractContainerMenu menu) {
         NonNullList<Slot> slots = menu.slots;
 
-        return IntStream.range(0, getContainerSize(menu))
+        return IntStream.range(getContainerStartIndex(menu), getContainerEndIndex(menu))
                 .mapToObj(slotIndex -> Map.entry(slotIndex, slots.get(slotIndex).getItem()))
                 .filter(itemStackEntry -> !itemStackEntry.getValue().is(Items.AIR))
                 .sorted(compare())
@@ -128,11 +135,21 @@ public abstract class AbstractSortAlphabeticallyButton extends AbstractWidget {
 
     }
 
-    private int getContainerSize(AbstractContainerMenu menu) {
+    private int getContainerStartIndex(AbstractContainerMenu menu) {
+        if (menu instanceof InventoryMenu || menu instanceof CreativeModeInventoryScreen.ItemPickerMenu) {
+            return 9;
+        }
+
+        return 0;
+    }
+
+    private int getContainerEndIndex(AbstractContainerMenu menu) {
         if (menu instanceof ChestMenu) {
             return ((ChestMenu) menu).getContainer().getContainerSize();
         } else if (menu instanceof ShulkerBoxMenu) {
             return 27;
+        } else if (menu instanceof InventoryMenu || menu instanceof CreativeModeInventoryScreen.ItemPickerMenu) {
+            return 36;
         }
 
         return 0;
@@ -191,8 +208,21 @@ public abstract class AbstractSortAlphabeticallyButton extends AbstractWidget {
     }
 
     private void swapItems(MultiPlayerGameMode gameMode, int containerId, int slot, int targetSlot, LocalPlayer player) {
-        gameMode.handleInventoryMouseClick(containerId, slot, 0, ClickType.PICKUP, player);
-        gameMode.handleInventoryMouseClick(containerId, targetSlot, 0, ClickType.PICKUP, player);
-        gameMode.handleInventoryMouseClick(containerId, slot, 0, ClickType.PICKUP, player);
+        pickUpItem(gameMode, containerId, slot, player);
+        pickUpItem(gameMode, containerId, targetSlot, player);
+        pickUpItem(gameMode, containerId, slot, player);
+    }
+
+    private void pickUpItem(MultiPlayerGameMode gameMode, int containerId, int slot, LocalPlayer player) {
+        ItemStack cursorStack = player.containerMenu.getCarried();
+        AbstractContainerMenu menu = containerScreen.getMenu();
+        Slot itemSlot = menu.getSlot(slot);
+        int mouseButton = 0;
+
+        if ((!cursorStack.is(Items.AIR) && itemSlot.getItem().is(ItemTags.BUNDLES)) || (cursorStack.is(ItemTags.BUNDLES) && !itemSlot.getItem().is(Items.AIR))) {
+            mouseButton = 1;
+        }
+
+        gameMode.handleInventoryMouseClick(containerId, slot, mouseButton, ClickType.PICKUP, player);
     }
 }
