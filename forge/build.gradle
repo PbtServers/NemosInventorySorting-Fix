@@ -12,6 +12,10 @@ mixin {
     config("${mod_id}.mixins.json")
 }
 
+tasks.named("assemble").configure {
+    dependsOn("jarJar")
+}
+
 jar {
     manifest {
         attributes["MixinConfigs"] = "${mod_id}.mixins.json"
