@@ -73,6 +73,18 @@ minecraft {
 
 sourceSets.main.resources { srcDir project.project(':common').file('src/generated/resources/').getAbsolutePath() }
 
+repositories {
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = 'Minecraft'
+                url = uri("https://libraries.minecraft.net")
+            }
+        }
+        filter { includeModule("org.lwjgl", "lwjgl-freetype") }
+    }
+}
+
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
