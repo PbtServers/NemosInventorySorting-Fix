@@ -1,6 +1,7 @@
 package com.nemonotfound.nemos.inventory.sorting.client.gui.components;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.NonNullList;
@@ -13,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.stream.IntStream;
 
 import static com.nemonotfound.nemos.inventory.sorting.Constants.MOD_ID;
@@ -48,16 +50,23 @@ public class DropAllButton extends AbstractSortButton {
         LocalPlayer player = minecraft.player;
         AbstractContainerMenu menu = containerScreen.getMenu();
         int containerId = menu.containerId;
+        boolean isCreativeModeMenu = menu instanceof CreativeModeInventoryScreen.ItemPickerMenu;
 
         List<Integer> slotItems = getItemSlots(menu);
 
-        for (Integer slotIndex : slotItems) {
-            if (gameMode != null && player != null) {
-                gameMode.handleInventoryMouseClick(containerId, slotIndex, 1, ClickType.THROW, player);
-            }
+        if (gameMode != null && player != null) {
+            Consumer<Integer> function = isCreativeModeMenu ?
+                    (slotIndex) -> menu.clicked(slotIndex, 1, ClickType.THROW, player) :
+                    (slotIndex) -> gameMode.handleInventoryMouseClick(containerId, slotIndex, 1, ClickType.THROW, player);
 
+            triggerItemDropForAllItems(slotItems, function);
         }
+    }
 
+    private void triggerItemDropForAllItems(List<Integer> slotItems, Consumer<Integer> function) {
+        for (Integer slotIndex : slotItems) {
+            function.accept(slotIndex);
+        }
     }
 
     private @NotNull List<Integer> getItemSlots(AbstractContainerMenu menu) {
