@@ -1,5 +1,4 @@
 {
-  "gui.nemosInventorySorting.sort_alphabetically": "Sort A-Z",
-  "gui.nemosInventorySorting.sort_alphabetically_descending": "Sort Z-A",
-  "gui.nemosInventorySorting.drop_all": "Drop All"
+  "gui.nemosInventorySorting.sort_alphabetically": "Items A-Z",
+  "gui.nemosInventorySorting.sort_alphabetically_descending": "Items Z-A",
 }

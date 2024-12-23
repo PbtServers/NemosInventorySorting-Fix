@@ -1,7 +1,6 @@
 package com.nemonotfound.nemos.inventory.sorting.mixin;
 
 import com.nemonotfound.nemos.inventory.sorting.client.gui.components.AbstractSortButton;
-import com.nemonotfound.nemos.inventory.sorting.factory.DropAllButtonFactory;
 import com.nemonotfound.nemos.inventory.sorting.factory.SortAlphabeticallyButtonFactory;
 import com.nemonotfound.nemos.inventory.sorting.factory.SortAlphabeticallyDescendingButtonFactory;
 import com.nemonotfound.nemos.inventory.sorting.interfaces.GuiPosition;
@@ -35,15 +34,12 @@ public abstract class InventoryScreenMixin extends AbstractRecipeBookScreen<Inve
 
         SortAlphabeticallyButtonFactory sortAlphabeticallyButtonFactory = SortAlphabeticallyButtonFactory.getInstance();
         SortAlphabeticallyDescendingButtonFactory sortAlphabeticallyDescendingButtonFactory = SortAlphabeticallyDescendingButtonFactory.getInstance();
-        DropAllButtonFactory dropAllButtonFactory = DropAllButtonFactory.getInstance();
 
         AbstractSortButton sortAlphabeticallyButton = sortAlphabeticallyButtonFactory.createButton(startIndex, endIndex, leftPos, topPos, xOffsetFirstButton, yOffset, imageWidth, size, size, this);
         AbstractSortButton sortAlphabeticallyDescendingButton = sortAlphabeticallyDescendingButtonFactory.createButton(startIndex, endIndex, leftPos, topPos, xOffsetSecondButton, yOffset, imageWidth, size, size, this);
-        AbstractSortButton dropAllButton = dropAllButtonFactory.createButton(startIndex, endIndex, leftPos, topPos, xOffsetThirdButton, yOffset, imageWidth, size, size, this);
 
         this.addRenderableWidget(sortAlphabeticallyButton);
         this.addRenderableWidget(sortAlphabeticallyDescendingButton);
-        this.addRenderableWidget(dropAllButton);
     }
 
     @Override

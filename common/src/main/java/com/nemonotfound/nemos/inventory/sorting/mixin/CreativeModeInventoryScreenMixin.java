@@ -1,7 +1,6 @@
 package com.nemonotfound.nemos.inventory.sorting.mixin;
 
 import com.nemonotfound.nemos.inventory.sorting.client.gui.components.AbstractSortButton;
-import com.nemonotfound.nemos.inventory.sorting.factory.DropAllButtonFactory;
 import com.nemonotfound.nemos.inventory.sorting.factory.SortAlphabeticallyButtonFactory;
 import com.nemonotfound.nemos.inventory.sorting.factory.SortAlphabeticallyDescendingButtonFactory;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -30,14 +29,11 @@ public abstract class CreativeModeInventoryScreenMixin extends AbstractContainer
 
         SortAlphabeticallyButtonFactory sortAlphabeticallyButtonFactory = SortAlphabeticallyButtonFactory.getInstance();
         SortAlphabeticallyDescendingButtonFactory sortAlphabeticallyDescendingButtonFactory = SortAlphabeticallyDescendingButtonFactory.getInstance();
-        DropAllButtonFactory dropAllButtonFactory = DropAllButtonFactory.getInstance();
 
         AbstractSortButton sortAlphabeticallyDescendingButton = sortAlphabeticallyDescendingButtonFactory.createButton(startIndex, endIndex, leftPos, topPos, xOffsetFirstButton, yOffset, imageWidth, size, size, this);
         AbstractSortButton sortAlphabeticallyButton = sortAlphabeticallyButtonFactory.createButton(startIndex, endIndex, leftPos, topPos, xOffsetSecondButton, yOffset, imageWidth, size, size, this);
-        AbstractSortButton dropAllButton = dropAllButtonFactory.createButton(startIndex, endIndex, leftPos, topPos, xOffsetThirdButton, yOffset, imageWidth, size, size, this);
 
         this.addRenderableWidget(sortAlphabeticallyButton);
         this.addRenderableWidget(sortAlphabeticallyDescendingButton);
-        this.addRenderableWidget(dropAllButton);
     }
 }
